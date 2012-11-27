@@ -1,0 +1,47 @@
+<?php
+
+$this->headMeta()->setCharset('utf-8');
+$this->headMeta()->appendName("viewport", "width=device-width, initial-scale=1.0");
+
+$this->headTitle("Email Console")->setSeparator(' – ');
+
+$this->headLink()->appendStylesheet('/css/bootstrap.min.css');
+$this->headLink()->appendStylesheet('/css/style.css');
+
+$this->headScript()->appendFile(
+    'http://html5shim.googlecode.com/svn/trunk/html5.js',
+    'text/javascript',
+    array('conditional' => 'lt IE 9')
+);
+
+$this->inlineScript()->prependFile('/js/bootstrap.min.js');
+$this->inlineScript()->prependFile('/js/jquery-1.8.3.min.js');
+
+echo $this->docType();
+?>
+
+<html lang="en">
+    <head>
+<?php
+    echo $this->headMeta()->setIndent("        ") . "\n\n";
+    echo $this->headTitle()->setIndent("        ") . "\n\n";
+    echo $this->headLink()->setIndent("        ") . "\n";
+    echo $this->headStyle()->setIndent('        ') . "\n";
+    echo $this->headScript()->setIndent("        ") . "\n";
+?>
+    </head>
+    <body>
+<?php echo $this->mainNav();?>
+
+        <section id="main-content" class="container">
+<?php echo $this->layout()->content; ?>
+        </section>
+
+        <footer>
+            <hr><p><small>Copyright &copy; Goran Jurić</small></p>
+        </footer>
+
+        <!-- Javascript -->
+<?php echo $this->inlineScript()->setIndent('        ') . "\n"; ?>
+    </body>
+</html>
