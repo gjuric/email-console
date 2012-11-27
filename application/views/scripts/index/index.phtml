@@ -20,12 +20,13 @@ $('.tt').each(function() {
                     </tr>
                 </thead>
                 <tbody>
+<?php foreach ($this->domains as $domain): ?>
                     <tr>
-                        <td><a href="#">ccentar.com</a></td>
-                        <td>7</td>
-                        <td>2</td>
-                        <td>Yes</td>
-                        <td>No</td>
+                        <td><a href="#"><?php echo $domain->getName();?></a></td>
+                        <td><?php echo $domain->getNumOfMailboxes();?></td>
+                        <td><?php echo $domain->getNumOfAliases();?></td>
+                        <td><?php echo ($domain->isActive() === true) ? 'Yes' : 'No';?></td>
+                        <td><?php echo ($domain->isBackup() === true) ? 'Yes' : 'No';?></td>
                         <td>
                             <div class="btn-group">
                                 <a class="btn btn-mini tt" title="Edit domain" href="#">
@@ -43,74 +44,6 @@ $('.tt').each(function() {
                             </div>
                         </td>
                     </tr>
-                    <tr>
-                        <td><a href="#">grafiknet.hr</a></td>
-                        <td>7</td>
-                        <td>2</td>
-                        <td>Yes</td>
-                        <td>No</td>
-                        <td>
-                            <div class="btn-group">
-                                <a class="btn btn-mini tt" title="Edit domain" href="#">
-                                    <i class="icon icon-pencil">Edit</i>
-                                </a>
-                                <a class="btn btn-mini tt" title="Administrators" href="#">
-                                    <i class="icon icon-user">Administrators</i>
-                                </a>
-                                <a class="btn btn-mini tt" tabindex="1" title="Logs" href="#">
-                                    <i class="icon icon-align-justify">Logs</i>
-                                </a>
-                                <span  class="btn btn-mini tt" title="Delete">
-                                    <i class="icon icon-trash">Delete</i>
-                                </span>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><a href="#">grafiknet.hr</a></td>
-                        <td>7</td>
-                        <td>2</td>
-                        <td>Yes</td>
-                        <td>No</td>
-                        <td>
-                            <div class="btn-group">
-                                <a class="btn btn-mini tt" title="Edit domain" href="#">
-                                    <i class="icon icon-pencil">Edit</i>
-                                </a>
-                                <a class="btn btn-mini tt" title="Administrators" href="#">
-                                    <i class="icon icon-user">Administrators</i>
-                                </a>
-                                <a class="btn btn-mini tt" tabindex="1" title="Logs" href="#">
-                                    <i class="icon icon-align-justify">Logs</i>
-                                </a>
-                                <span  class="btn btn-mini tt" title="Delete">
-                                    <i class="icon icon-trash">Delete</i>
-                                </span>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><a href="#">grafiknet.hr</a></td>
-                        <td>7</td>
-                        <td>2</td>
-                        <td>Yes</td>
-                        <td>No</td>
-                        <td>
-                            <div class="btn-group">
-                                <a class="btn btn-mini tt" title="Edit domain" href="#">
-                                    <i class="icon icon-pencil">Edit</i>
-                                </a>
-                                <a class="btn btn-mini tt" title="Administrators" href="#">
-                                    <i class="icon icon-user">Administrators</i>
-                                </a>
-                                <a class="btn btn-mini tt" tabindex="1" title="Logs" href="#">
-                                    <i class="icon icon-align-justify">Logs</i>
-                                </a>
-                                <span  class="btn btn-mini tt" title="Delete">
-                                    <i class="icon icon-trash">Delete</i>
-                                </span>
-                            </div>
-                        </td>
-                    </tr>
+<?php endforeach;?>
                 </tbody>
             </table>

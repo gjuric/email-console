@@ -9,18 +9,23 @@
  * file that was distributed with this source code.
  */
 
+use Ccentar\Service\DomainService;
+
 /**
  * Index Controller
  *
  * @package     Email Console
  * @subpackage  Controllers
  */
-class IndexController extends Zend_Controller_Action
+class IndexController extends \Zend_Controller_Action
 {
     /**
      * Index Action
      */
     public function indexAction()
     {
+        $service = new DomainService();
+
+        $this->view->domains = $service->fetchAll();
     }
 }
