@@ -5,6 +5,11 @@ $('.tt').each(function() {
 });
 ");
 ?>
+            <span class="btn-group pull-right">
+                <a class="btn btn-primary" href="/domain/add" >
+                    <i class="icon-plus icon-white"></i> Add domain
+                </a>
+            </span>
 
             <h1>Hosted domains</h1>
 
@@ -29,7 +34,7 @@ $('.tt').each(function() {
                         <td><?php echo ($domain->isBackup() === true) ? 'Yes' : 'No';?></td>
                         <td>
                             <div class="btn-group">
-                                <a class="btn btn-mini tt" title="Edit domain" href="#">
+                                <a class="btn btn-mini tt" title="Edit domain" href="/domain/edit/id/<?php echo $domain->getId();?>">
                                     <i class="icon icon-pencil">Edit</i>
                                 </a>
                                 <a class="btn btn-mini tt" title="Administrators" href="#">

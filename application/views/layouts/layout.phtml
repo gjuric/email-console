@@ -34,6 +34,7 @@ echo $this->docType();
 <?php echo $this->mainNav();?>
 
         <section id="main-content" class="container">
+<?php echo $this->flashMessages(); ?>
 <?php echo $this->layout()->content; ?>
         </section>
 

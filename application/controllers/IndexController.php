@@ -24,8 +24,6 @@ class IndexController extends \Zend_Controller_Action
      */
     public function indexAction()
     {
-        $service = new DomainService();
-
-        $this->view->domains = $service->fetchAll();
+        $this->_forward('index', 'domain');
     }
 }

@@ -11,5 +11,19 @@
 
 class Bootstrap extends \Zend_Application_Bootstrap_Bootstrap
 {
+    /**
+     * Init Default Namespace
+     *
+     * So we do not have to call our forms prefixed with "Default_".
+     * @return \Zend_Application_Module_Autoloader
+     */
+    public function _initDefaultNamespace()
+    {
+        $autoloader = new \Zend_Application_Module_Autoloader(array(
+            'namespace' => '',
+            'basePath'  => APPLICATION_PATH,
+        ));
+        return $autoloader;
+    }
 
 }

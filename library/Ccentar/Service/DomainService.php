@@ -71,4 +71,41 @@ class DomainService
     {
         return $this->getRepository()->findAll();
     }
+
+    /**
+     * Get Domain
+     *
+     * @param integer $id
+     * @return Domain
+     */
+    public function get($id)
+    {
+        return $this->getRepository()->find($id);
+    }
+
+    /**
+     * Add a Domain
+     *
+     * @param array $data
+     */
+    public function add($data)
+    {
+        $domain = new Domain();
+        $domain->fromArray($data);
+        $this->getRepository()->save($domain);
+    }
+
+    /**
+     * Edit a Domain
+     *
+     * @param Domain $domain
+     * @param array $data
+     */
+    public function edit($domain, $data)
+    {
+        $domain->fromArray($data);
+        $domain->setModified();
+
+        $this->getRepository()->save($domain);
+    }
 }

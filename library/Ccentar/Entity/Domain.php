@@ -93,7 +93,7 @@ class Domain
     {
         $this->mailboxes = new ArrayCollection();
         $this->users = new ArrayCollection();
-        $this->created_at = new \DateTime("now");
+        $this->created_at = $this->modified_at = new \DateTime("now");
     }
 
     /**
@@ -141,6 +141,11 @@ class Domain
         return $this->backup_mx;
     }
 
+    public function setModified()
+    {
+        $this->modified_at = new \DateTime("now");
+    }
+
     /**
      * Add User
      *
@@ -149,5 +154,19 @@ class Domain
     public function addUser(User $user)
     {
         $this->users[] = $user;
+    }
+
+    /**
+     * Set valus from array
+     *
+     * @param array $data
+     */
+    public function fromArray($data)
+    {
+        $this->name = $data['domain'];
+        $this->active = $data['active'];
+        $this->backup_mx = $data['backup_mx'];
+        $this->aliases_num = $data['aliases_num'];
+        $this->mailboxes_num = $data['mailboxes_num'];
     }
 }

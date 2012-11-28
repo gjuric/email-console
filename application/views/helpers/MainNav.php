@@ -28,9 +28,9 @@ class Zend_View_Helper_MainNav extends Zend_View_Helper_Abstract
         <header class="navbar">
             <div class="navbar-inner navbar-static-top">
                 <div class="container">
-                    <a class="brand" href="#">Email Console</a>
+                    <a class="brand" href="/">Email Console</a>
                     <ul class="nav">
-                        <li class="active"><a href="#">Domains</a></li>
+                        <li class="active"><a href="/domain">Domains</a></li>
                         <li><a href="#">Administrators</a></li>
                         <li><a href="#">Reports</a></li>
                         <li><a href="#">Logs</a></li>
