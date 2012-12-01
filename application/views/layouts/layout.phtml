@@ -31,7 +31,17 @@ echo $this->docType();
 ?>
     </head>
     <body>
-<?php echo $this->mainNav();?>
+        <header class="navbar">
+            <div class="navbar-inner navbar-static-top">
+                <div class="container">
+                    <a class="brand" href="/">Email Console</a>
+<?php echo $this->menu();?>
+                    <ul class="nav pull-right">
+                        <li><a title="Logout" href="#">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
 
         <section id="main-content" class="container">
 <?php echo $this->flashMessages(); ?>

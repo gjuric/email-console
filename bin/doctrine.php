@@ -11,12 +11,6 @@
  */
 require_once realpath(dirname(__FILE__) . '/../setup.php');
 
-// Create application
-$application = new Zend_Application(
-    APPLICATION_ENV,
-    APPLICATION_PATH . '/configs/application.ini'
-);
-
 // Bootstrapping resources
 $bootstrap = $application->bootstrap()->getBootstrap();
 

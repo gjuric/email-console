@@ -1,0 +1,35 @@
+<?php if ($this->pageCount): ?>
+            <div class="pagination">
+                <p>Showing <?php echo $this->firstItemNumber; ?> - <?php echo $this->lastItemNumber; ?>
+ of <?php echo $this->totalItemCount; ?></p>
+                <ul>
+<?php if (isset($this->previous)): ?>
+                    <li><a href="<?php echo $this->url(array('page' => $this->first)); ?>">&laquo; First</a></li>
+<?php else: ?>
+                    <li class="disabled"><span>&laquo; First</span></li>
+<?php endif; ?>
+<?php if (isset($this->previous)): ?>
+                    <li><a href="<?php echo $this->url(array('page' => $this->previous)); ?>">&laquo; Previous</a></li>
+<?php else: ?>
+                    <li class="disabled"><span>&laquo; Previous</span></li>
+<?php endif; ?>
+<?php foreach ($this->pagesInRange as $page): ?>
+<?php if ($page != $this->current): ?>
+                    <li><a href="<?php echo $this->url(array('page' => $page)); ?>"><?php echo $page; ?></a></li>
+<?php else: ?>
+                    <li class="active"><span><?php echo $page; ?></span></li>
+<?php endif; ?>
+<?php endforeach; ?>
+<?php if (isset($this->next)): ?>
+                    <li><a href="<?php echo $this->url(array('page' => $this->next)); ?>">Next &raquo;</a></li>
+<?php else: ?>
+                    <li class="disabled"><span>Next &raquo;</span></li>
+<?php endif; ?>
+<?php if (isset($this->next)): ?>
+                    <li><a href="<?php echo $this->url(array('page' => $this->last)); ?>">Last &raquo;</a></li>
+<?php else: ?>
+                    <li class="disabled"><span>Last &raquo;</span></li>
+<?php endif; ?>
+                </ul>
+            </div>
+<?php endif; ?>

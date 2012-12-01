@@ -20,10 +20,10 @@ if (!defined('LIBRARY_PATH')) {
     define('LIBRARY_PATH', ROOT_PATH . '/library');
 }
 
-// Set environmnet (default to 'development')
+// Set environmnet (default to 'production')
 if (!defined('APPLICATION_ENV')) {
     define('APPLICATION_ENV',
-        (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'development')
+        (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production')
     );
 }
 
@@ -32,3 +32,13 @@ set_include_path(LIBRARY_PATH . PATH_SEPARATOR . get_include_path());
 
 // Zend_Application
 require_once LIBRARY_PATH . '/Zend/Application.php';
+
+// Use application.local.ini if exists
+if (file_exists(APPLICATION_PATH . '/configs/application.local.ini')) {
+    $appIni = APPLICATION_PATH . '/configs/application.local.ini';
+} else {
+    $appIni = APPLICATION_PATH . '/configs/application.ini';
+}
+
+// Create application
+$application = new Zend_Application(APPLICATION_ENV, $appIni);

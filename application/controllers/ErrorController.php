@@ -28,7 +28,7 @@ class ErrorController extends Zend_Controller_Action
     {
         $errors = $this->_getParam('error_handler');
 
-        if (APPLICATION_ENV === 'development') {
+//        if (APPLICATION_ENV === 'development') {
             $this->view->requestParams = $errors->request->getParams();
 
             // shiny.phtml
@@ -37,7 +37,7 @@ class ErrorController extends Zend_Controller_Action
             $this->_helper->layout->disableLayout();
             $this->_helper->viewRenderer('shiny');
             return;
-        }
+//        }
 
 
         $this->_helper->layout->setLayout('layout');
@@ -71,9 +71,9 @@ class ErrorController extends Zend_Controller_Action
                         $this->_helper->viewRenderer('404');
                     } else {
                         $code = 500;
+                        $this->_helper->viewRenderer('404');
                     }
 
-                    $this->_helper->log($errors->exception);
                 }
 
                 break;
