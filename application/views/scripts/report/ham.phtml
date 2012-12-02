@@ -1,0 +1,20 @@
+            <h2>Cleanest emails</h2>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Domain</th>
+                        <th class="center">Average Spam score</th>
+                        <th class="center">Num of messages</th>
+                    </tr>
+                </thead>
+                <tbody>
+<?php foreach ($this->messages as $mail): ?>
+                    <tr>
+                        <td><?php echo $this->reverseDomain($mail['domain']); ?></td>
+                        <td class="center"><?php echo number_format($mail['spam_avg'], 2); ?></td>
+                        <td class="center"><?php echo $mail['cnt']; ?></td>
+                    </tr>
+<?php endforeach; ?>
+                </tbody>
+            </table>

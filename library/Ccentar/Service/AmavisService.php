@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the Email Console application.
+ *
+ * (c) Goran Jurić <goran@ccentar.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Ccentar\Service;
 
 use Doctrine\DBAL\Connection;
@@ -8,7 +17,8 @@ use PDO;
 /**
  * Domain Service
  *
- * @author Goran Jurić
+ * @package     Email Console
+ * @subpackage  Service
  */
 class AmavisService
 {
@@ -61,9 +71,10 @@ class AmavisService
             sender.email AS sender,
             recip.email  AS recipient,
             msgs.subject AS subject
-            FROM msgs LEFT JOIN msgrcpt         ON msgs.mail_id=msgrcpt.mail_id
-                        LEFT JOIN maddr AS sender ON msgs.sid=sender.id
-                        LEFT JOIN maddr AS recip  ON msgrcpt.rid=recip.id
+            FROM msgs
+                LEFT JOIN msgrcpt ON msgs.mail_id=msgrcpt.mail_id
+                LEFT JOIN maddr AS sender ON msgs.sid=sender.id
+                LEFT JOIN maddr AS recip  ON msgrcpt.rid=recip.id
             WHERE content IS NOT NULL
             ORDER BY msgs.time_num DESC LIMIT " . (int) $perPage . " OFFSET $offset";
 
@@ -96,13 +107,13 @@ class AmavisService
      */
     public function topSpam($limit = 25)
     {
-        $query = "SELECT count(*) as cnt, avg(bspam_level), sender.domain
+        $query = "SELECT count(*) as cnt, avg(bspam_level) as spam_avg, sender.domain
             FROM msgs
             LEFT JOIN msgrcpt ON msgs.mail_id=msgrcpt.mail_id
             LEFT JOIN maddr AS sender ON msgs.sid=sender.id
             LEFT JOIN maddr AS recip ON msgrcpt.rid=recip.id
             WHERE content IN ('V', 's', 'S', 'B')
-            GROUP BY sender.domain ORDER BY cnt DESC LIMIT " . (int) $limit;
+            GROUP BY sender.domain ORDER BY spam_avg DESC LIMIT " . (int) $limit;
 
         return $this->conn->executeQuery($query)->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -122,7 +133,7 @@ class AmavisService
             LEFT JOIN maddr AS recip ON msgrcpt.rid=recip.id
             WHERE bspam_level IS NOT NULL
             GROUP BY sender.domain HAVING count(*) > 5
-            ORDER BY spam_avg DESC LIMIT " . (int) $limit;
+            ORDER BY spam_avg ASC LIMIT " . (int) $limit;
         return $this->conn->executeQuery($query)->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -139,8 +150,8 @@ class AmavisService
             LEFT JOIN msgrcpt ON msgs.mail_id=msgrcpt.mail_id
             LEFT JOIN maddr AS sender ON msgs.sid=sender.id
             LEFT JOIN maddr AS recip ON msgrcpt.rid=recip.id
-            GROUP BY sender.domain HAVING count(*) > 100
-            ORDER BY sender.domain DESC LIMIT " . (int) $limit;
+            GROUP BY sender.domain HAVING count(*) > 5
+            ORDER BY cnt DESC LIMIT " . (int) $limit;
         return $this->conn->executeQuery($query)->fetchAll(PDO::FETCH_ASSOC);
     }
 
