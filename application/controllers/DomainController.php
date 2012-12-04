@@ -111,6 +111,26 @@ class DomainController extends \Zend_Controller_Action
     }
 
     /**
+     * Mailbox Action
+     * 
+     * @throws \Exception
+     */
+    public function mailboxAction()
+    {
+        $domainId = $this->_getParam('id', null);
+
+        $domainService = new DomainService();
+        $domain = $domainService->get($domainId);
+
+
+        if (is_null($domain)) {
+            throw new \Exception('Domain not found', 404);
+        }
+
+        $this->view->domain = $domain;
+    }
+
+    /**
      * Get Add Form
      *
      * @return \Form_DomainAdd

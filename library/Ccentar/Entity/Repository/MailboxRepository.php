@@ -12,24 +12,24 @@
 namespace Ccentar\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Ccentar\Entity\Domain;
+use Ccentar\Entity\Mailbox;
 
 /**
- * Domain Repository
+ * Mailbox Repository
  *
  * @package     Email Console
  * @subpackage  Repository
  */
-class DomainRepository extends EntityRepository
+class MailboxRepository extends EntityRepository
 {
     /**
      * Save
      *
-     * @param Domain $domain
+     * @param Mailbox $mailbox
      */
-    public function save($domain)
+    public function save(Mailbox $mailbox)
     {
-        $this->getEntityManager()->persist($domain);
+        $this->getEntityManager()->persist($mailbox);
         $this->getEntityManager()->flush();
     }
 }

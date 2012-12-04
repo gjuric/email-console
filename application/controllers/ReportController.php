@@ -54,6 +54,11 @@ class ReportController extends Zend_Controller_Action
         $this->view->messages = $service->topHam();
     }
 
+    /**
+     * Senders Action
+     *
+     * View top senders by message count.
+     */
     public function sendersAction()
     {
         $service = new AmavisService();

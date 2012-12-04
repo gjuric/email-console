@@ -1,0 +1,62 @@
+<form enctype="application/x-www-form-urlencoded" action="" method="post">
+    <fieldset id="fieldset-mailboxAdd">
+
+        <div class="control-group<?php if ($this->element->email->hasErrors()) { echo " error";}?>">
+            <label for="email" class="control-label required"><?php echo $this->element->email->getLabel();?></label>
+            <div class="controls">
+                <div class="input-append">
+                    <input type="text" name="email" id="email" value="<?php echo $this->element->email->getValue();?>">
+                    <span class="add-on"><?php echo $this->element->email->domain; ?></span>
+                </div>
+<?php
+    if ($this->element->email->hasErrors()) {
+        echo "<ul>";
+        foreach ($this->element->email->getMessages() as $key => $message) {
+            echo '<li>' . $message . '</li>';
+        }
+        echo "</ul>";
+    }
+?>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label for="name" class="control-label"><?php echo $this->element->name->getLabel();?></label>
+            <div class="controls">
+                    <input type="text" name="name" id="name" value="<?php echo $this->element->name->getValue();?>">
+            </div>
+        </div>
+
+        <div class="control-group<?php if ($this->element->password->hasErrors()) { echo " error";}?>">
+            <label for="password" class="control-label required"><?php echo $this->element->password->getLabel();?></label>
+            <div class="controls">
+                <input type="text" name="password" id="password" value="">
+            </div>
+<?php
+    if ($this->element->password->hasErrors()) {
+        echo "<ul>";
+        foreach ($this->element->password->getMessages() as $key => $message) {
+            echo '<li>' . $message . '</li>';
+        }
+        echo "</ul>";
+    }
+?>
+        </div>
+
+        <div class="control-group">
+            <label for="active" class="control-label required">Active</label>
+            <div class="controls">
+                <label class="radio"><input type="radio" name="active" id="active-0" value="0">No</label>
+                <label class="radio"><input type="radio" name="active" id="active-1" value="1" checked="checked">Yes</label>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <input type="submit" name="submit" id="submit" value="Save" class="btn btn-primary">
+            <input type="submit" name="cancel" id="cancel" value="Cancel" class="btn" type="reset">
+        </div>
+    </fieldset>
+<?php
+    echo $this->element->domainId;
+?>
+</form>

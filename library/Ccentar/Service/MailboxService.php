@@ -13,15 +13,16 @@ namespace Ccentar\Service;
 
 use Ccentar\Entity\Domain;
 use Ccentar\Entity\User;
+use Ccentar\Entity\Mailbox;
 use Doctrine\ORM\EntityManager;
 
 /**
- * Domain Service
+ * Mailbox Service
  *
  * @package     Email Console
  * @subpackage  Service
  */
-class DomainService
+class MailboxService
 {
     /**
      * @var Doctrine\ORM\EntityManager
@@ -55,62 +56,27 @@ class DomainService
     /**
      * Get Repository
      *
-     * @return \Ccentar\Entity\Repository\DomainRepository
+     * @return \Ccentar\Entity\Repository\MailboxRepository
      */
     public function getRepository()
     {
-        return $this->getEntityManager()->getRepository('\Ccentar\Entity\Domain');
+        return $this->getEntityManager()->getRepository('\Ccentar\Entity\Mailbox');
     }
 
     /**
-     * Fetch All Domains
-     *
-     * @return array
-     */
-    public function fetchAll()
-    {
-        return $this->getRepository()->findAll();
-    }
-
-    /**
-     * Get Domain
-     *
-     * @param integer $id
-     * @return Ccentar\Entity\Domain
-     */
-    public function get($id)
-    {
-        return $this->getRepository()->find($id);
-    }
-
-    /**
-     * Add a Domain
+     * Add Mailbox
      *
      * @param array $data
-     * @return Domain
-     */
-    public function add($data)
-    {
-        $domain = new Domain();
-        $domain->fromArray($data);
-        $this->getRepository()->save($domain);
-
-        return $domain;
-    }
-
-    /**
-     * Edit a Domain
-     *
      * @param Domain $domain
-     * @param array $data
-     * @return Domain
+     * @return Mailbox
      */
-    public function edit($domain, $data)
+    public function add($data, Domain $domain)
     {
-        $domain->fromArray($data);
-        $domain->setModifiedAt(new \DateTime("now"));
-        $this->getRepository()->save($domain);
+        $mailbox = new Mailbox();
+        $mailbox->fromArray($data);
+        $mailbox->setDomain($domain);
+        $this->getRepository()->save($mailbox);
 
-        return $domain;
+        return $mailbox;
     }
 }

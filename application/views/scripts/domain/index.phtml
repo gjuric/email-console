@@ -27,7 +27,7 @@ $('.tt').each(function() {
                 <tbody>
 <?php foreach ($this->domains as $domain): ?>
                     <tr>
-                        <td><a href="#"><?php echo $domain->getName();?></a></td>
+                        <td><a href="/domain/mailbox/id/<?php echo $domain->getId();?>"><?php echo $domain->getName();?></a></td>
                         <td><?php echo $domain->getNumOfMailboxes();?></td>
                         <td><?php echo $domain->getNumOfAliases();?></td>
                         <td><?php echo ($domain->isActive() === true) ? 'Yes' : 'No';?></td>

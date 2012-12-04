@@ -1,0 +1,29 @@
+            <span class="btn-group pull-right">
+                <a class="btn btn-primary" href="/mailbox/add/domainId/<?php echo $this->domain->getId();?>" >
+                    <i class="icon-plus icon-white"></i> Add a mailbox
+                </a>
+            </span>
+
+            <h1>Maillboxes for <?php echo $this->domain->getName();?></h1>
+
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#">Mailboxes</a></li>
+                <li><a href="/domain/aliases/id/<?php echo $this->domain->getId();?>">Forwards</a></li>
+            </ul>
+
+            <table class="table table-big table-striped">
+                <thead>
+                    <tr>
+                        <th>Mailbox</th>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+<?php foreach ($this->domain->getMailboxes() as $mailbox): ?>
+                    <tr>
+                        <td><?php echo $mailbox->getUsername();?></td>
+                        <td><?php echo $mailbox->getName();?></td>
+                    </tr>
+<?php endforeach;?>
+                </tbody>
+            </table>

@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @package     Email Console
  * @subpackage  Entity
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Ccentar\Entity\Repository\MailboxRepository")
  * @ORM\Table(name="mailbox")
  */
 class Mailbox
@@ -45,7 +45,7 @@ class Mailbox
     protected $password;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
      */
     protected $name;
@@ -91,7 +91,7 @@ class Mailbox
      */
     public function __construct()
     {
-        $this->created_at = new \DateTime("now");
+        $this->created_at = $this->modified_at = new \DateTime("now");
     }
 
     /**
@@ -115,12 +115,63 @@ class Mailbox
     }
 
     /**
+     * Get Username
+     *
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Set Username
+     *
+     * @param string $username
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        list($local, $domain) = explode('@', $username);
+        $this->local_part = $local;
+
+        $this->maildir = '/' . $domain . '/' . $local;
+    }
+
+    /**
+     * Get Name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
      * Set Domain
-     * 
+     *
      * @param Domain $domain
      */
     public function setDomain(Domain $domain)
     {
         $this->domain = $domain;
+    }
+
+    /**
+     * Set valus from array
+     *
+     * @param array $data
+     */
+    public function fromArray($data)
+    {
+        $this->setUsername($data['email']);
+        $this->name     = $data['name'];
+        if (!empty($data['password'])) {
+            $this->password = $data['password'];
+        }
+
+        $this->active = $data['active'];
     }
 }

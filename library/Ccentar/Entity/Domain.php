@@ -141,9 +141,19 @@ class Domain
         return $this->backup_mx;
     }
 
-    public function setModified()
+    public function setModifiedAt($dateTime)
     {
-        $this->modified_at = new \DateTime("now");
+        $this->modified_at = $dateTime;
+    }
+
+    /**
+     * Get Mailboxes
+     *
+     * @return array
+     */
+    public function getMailboxes()
+    {
+        return $this->mailboxes;
     }
 
     /**
